@@ -18,9 +18,9 @@ class ScrapyXiciSpiderMiddleware(object):
             n = ScrapyXiciSpiderMiddleware.http_n
             n=n if n<len(ips['http']) else 0
             request.meta['proxy'] = 'http://%s'%(ips['http'][n])
-            ScrapyXiciSpiderMiddleware.http_n += n
+            ScrapyXiciSpiderMiddleware.http_n += 1
         if request.url.startswith('https://'):
             n = ScrapyXiciSpiderMiddleware.http_n
             n=n if n<len(ips['https']) else 0
             request.meta['proxy'] = 'https://%s'%(ips['https'][n])
-            ScrapyXiciSpiderMiddleware.http_n += n
+            ScrapyXiciSpiderMiddleware.http_n += 1
