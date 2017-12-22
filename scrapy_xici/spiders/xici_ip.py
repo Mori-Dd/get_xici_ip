@@ -8,7 +8,7 @@ class XiciIpSpider(scrapy.Spider):
     start_urls = ['http://www.xicidaili.com/nn/']
     def start_requests(self):
         urls = []
-        for i in range(1,2586):
+        for i in range(1,3):
             url = scrapy.Request('http://www.xicidaili.com/nn/%s'%i)
             urls.append(url)
         return urls

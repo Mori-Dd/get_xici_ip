@@ -5,7 +5,7 @@
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
 import pymongo
-
+import traceback
 class ScrapyXiciPipeline(object):
     def process_item(self, item, spider):
         items = {
@@ -19,13 +19,15 @@ class ScrapyXiciPipeline(object):
         }
         MONGO_URL = 'localhost'
         MONGO_DB = 'xici'
-        MONGO_TABLE = 'xiciip'
+        MONGO_TABLE = 'xici_ip'
 
         client = pymongo.MongoClient(MONGO_URL)
         db = client[MONGO_DB]
         try:
-            if db[MONGO_TABLE].insert(items):
-                print('存储到MONGODB成功',items)
+            if float(items['速度']) <= 2:
+                if db[MONGO_TABLE].insert(items):
+                    print('存储到MONGODB成功',items)
         except Exception:
+            traceback.print_exc()
             print('存货到MONGODB错误',items)
         return item
